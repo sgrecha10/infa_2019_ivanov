@@ -1,4 +1,8 @@
-"""Evil  smile
+"""
+Evil  smile
+version 1.0
+
+sgrecha10@gmail.com
 
 """
 
