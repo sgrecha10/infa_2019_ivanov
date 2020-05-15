@@ -12,7 +12,7 @@ def main():
     draw_waves()
     draw_sun()
     draw_umbrella()
-    draw_ship()
+    draw_ship() 
     draw_clouds_circle()
     draw_clouds_oval(330, 50, 25)
 
