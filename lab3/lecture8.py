@@ -1,43 +1,58 @@
 import tkinter as tk
 from random import randint
 
+
 WIDTH = 800
 HEIGHT = 600
 
+
+class Ball:
+    def __init__(self):
+        self.r = randint(20, 50)
+        self.x = randint(self.r, WIDTH - self.r)
+        self.y = randint(self.r, HEIGHT - self.r)
+        self.dx = randint(2, 5)
+        self.dy = randint(2, 5)
+        self.color = "#%02x%02x%02x" % (randint(0, 255),
+                                        randint(0, 255),
+                                        randint(0, 255))
+        self.ball_id = c.create_oval(self.x - self.r,
+                                     self.y - self.r,
+                                     self.x + self.r,
+                                     self.y + self.r, fill=self.color)
+
+    def move(self):
+        self.x += self.dx
+        self.y += self.dy
+        if self.x >= WIDTH - self.r or self.x <= self.r:
+            self.dx = -self.dx
+        if self.y >= HEIGHT - self.r or self.y <= self.r:
+            self.dy = -self.dy
+
+    def show(self):
+        c.move(self.ball_id, self.dx, self.dy)
+
+
 def tick():
-    global x, y
-    global dx, dy
-    #global ball_id, r
-
-    x += dx
-    y += dy
-
-    if x >= WIDTH-r or x <= r:
-        dx = -dx
-    if y >= HEIGHT-r or y <= r:
-        dy = -dy
-
-    c.move(ball_id, dx, dy)
+    for b in bs:
+        b.move()
+        b.show()
     root.after(20, tick)
 
 
 def main():
-    global root, c
-    global ball_id, x, y, dx, dy, r
+    global root, c, bs
 
     root = tk.Tk()
     c = tk.Canvas(root, width=WIDTH, height=HEIGHT)
     c.pack()
 
-    r = randint(20, 50)
-    x = randint(r, WIDTH-r)
-    y = randint(r, HEIGHT-r)
+    #bs = [Ball() for i in range(5)]
 
-    dx = randint(2, 5)
-    dy = randint(2, 5)
+    bs = []
+    for i in range(20):
+        bs.append(Ball())
 
-    color = "#%02x%02x%02x" % (randint(0, 255), randint(0, 255), randint(0, 255))
-    ball_id = c.create_oval(x-r, y-r, x+r, y+r, fill=color)
 
     tick()
     root.mainloop()
