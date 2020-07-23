@@ -1,8 +1,9 @@
 """
 1_1.png
 """
-
 from graph import *
+
+
 
 def main():
     windowSize(600, 402)
